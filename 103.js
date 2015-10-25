@@ -25,10 +25,10 @@ rollingSpider.connect(function () {
         rollingSpider.flatTrim();
 
          rollingSpider.on('battery', printBattery);
-        
+
         setTimeout(function () {
             console.log('Ready for Flight');
-        }, 1000);
+        }, 500);
     });
 });
 
@@ -46,11 +46,35 @@ ps4Controller.on('dpadUp:press', (thing) => {
 ps4Controller.on('share:press', (thing) => {
     console.log('OFF');
     rollingSpider.land();
+    process.exit(0);
 });
 
 ps4Controller.on('options:press', (thing) => {
     console.log('ON');
     rollingSpider.takeOff();
+});
+
+/**
+ * Rolling!
+ */
+ps4Controller.on('triangle:press', (thing) => {
+    console.log('FRONTFLIP');
+    rollingSpider.frontFlip();
+});
+
+ps4Controller.on('circle:press', (thing) => {
+    console.log('RIGHT FLIP');
+    rollingSpider.rightFlip();
+});
+
+ps4Controller.on('x:press', (thing) => {
+    console.log('BACKFLIP');
+    rollingSpider.backFlip();
+});
+
+ps4Controller.on('square:press', (thing) => {
+    console.log('LEFTFLIP');
+    rollingSpider.leftFlip();
 });
 
 ps4Controller.connect();
