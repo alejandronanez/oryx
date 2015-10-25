@@ -52,6 +52,7 @@ ps4Controller.on('share:press', (thing) => {
 ps4Controller.on('options:press', (thing) => {
     console.log('ON');
     rollingSpider.takeOff();
+    rollingSpider.flatTrim();
 });
 
 /**
