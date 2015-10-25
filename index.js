@@ -4,7 +4,7 @@ let dualShock = require('dualshock-controller');
 let RollingSpider = require('rolling-spider');
 let vertical = 50;
 let horizontal = 50;
-let speed = 5;
+let speed = 50;
 
 let ps4Controller = dualShock({
         config : "dualshock4-generic-driver",
@@ -28,7 +28,7 @@ function printBattery() {
  * @return {Number}           The new value for vertical or horizontal
  */
 function manipulateAxis(direction) {
-    let baseIncrement;
+    let baseIncrement = 10;
     let options = {
         dpadUp() {
             if (vertical <= 95) {

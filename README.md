@@ -14,6 +14,13 @@ Just run `npm install` to install dependencies.
 
 We're using a Dualshock 4 controller to move our Rolling Spider.
 
+#### ON / OFF
+
+```
+OPTIONS BUTTON: TURN ON
+SHARE BUTTON: TURN OFF
+```
+
 #### Barrel roll!
 
 ```
