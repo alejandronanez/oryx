@@ -1,11 +1,12 @@
 'use strict';
 
-var dualShock = require('dualshock-controller');
-var RollingSpider = require('rolling-spider');
-var vertical = 50;
-var horizontal = 50;
+let dualShock = require('dualshock-controller');
+let RollingSpider = require('rolling-spider');
+let vertical = 50;
+let horizontal = 50;
+let speed = 5;
 
-var ps4Controller = dualShock({
+let ps4Controller = dualShock({
         config : "dualshock4-generic-driver",
         //smooths the output from the acelerometers (moving averages) defaults to true
         accelerometerSmoothing : true,
@@ -15,7 +16,7 @@ var ps4Controller = dualShock({
 
 // Initialize Drone
 // // We're not passing UUID because we only have 1 Rolling Spider in the room :D
-var rollingSpider = new RollingSpider();
+let rollingSpider = new RollingSpider();
 
 function printBattery() {
     console.log(`Battery: ${rollingSpider.status.battery}%`);
@@ -27,76 +28,78 @@ function printBattery() {
  * @return {Number}           The new value for vertical or horizontal
  */
 function manipulateAxis(direction) {
+    let baseIncrement;
     let options = {
         dpadUp() {
             if (vertical <= 95) {
-                vertical = vertical + 5;
+                vertical = vertical + baseIncrement;
             }
             return vertical;
         },
         dpadRight() {
             if (horizontal <= 95) {
-                horizontal = horizontal + 5
+                horizontal = horizontal + baseIncrement;
             }
 
             return horizontal;
         },
         dpadDown() {
             if (vertical >= 5) {
-                vertical = vertical - 5
+                vertical = vertical - baseIncrement;
             }
 
             return vertical;
         },
         dpadLeft() {
             if (horizontal >= 5) {
-                horizontal = horizontal - 5
+                horizontal = horizontal - baseIncrement;
             }
             return horizontal;
         },
     }
 
     if (options.hasOwnProperty(direction)) {
+        console.log(`Vertical: ${vertical} / Horizontal: ${horizontal}`);
         return options[direction]();
     }
 }
 
-// rollingSpider.connect(function () {
-//     rollingSpider.setup(function () {
-//         console.log(`Configured for Rolling Spider! ${rollingSpider.name}`);
-//         rollingSpider.flatTrim();
-//         rollingSpider.startPing();
-//         rollingSpider.flatTrim();
+rollingSpider.connect(() => {
+    rollingSpider.setup(() => {
+        console.log(`Configured for Rolling Spider! ${rollingSpider.name}`);
+        rollingSpider.flatTrim();
+        rollingSpider.startPing();
+        rollingSpider.flatTrim();
 
-//          rollingSpider.on('battery', printBattery);
+         rollingSpider.on('battery', printBattery);
 
-//         setTimeout(function () {
-//             console.log('Ready for Flight');
-//         }, 500);
-//     });
-// });
+        setTimeout(() => {
+            console.log('Ready for Flight');
+        }, 500);
+    });
+});
 
 /**
  * Add listeners for the controller
  */
 ps4Controller.on('dpadDown:press', (direction) => {
-    console.log(manipulateAxis(direction))
-    console.log('DOWN');
+    rollingSpider.backward({steps: manipulateAxis(direction), speed: speed});
+    console.log('Moving Backward');
 });
 
 ps4Controller.on('dpadUp:press', (direction) => {
-    console.log(manipulateAxis(direction))
-    console.log('UUUP');
+    rollingSpider.forward({steps: manipulateAxis(direction), speed: speed});
+    console.log('Moving forward');
 });
 
 ps4Controller.on('dpadRight:press', (direction) => {
-    console.log(manipulateAxis(direction))
-    console.log('Right');
+    rollingSpider.right({steps: manipulateAxis(direction), speed: speed});
+    console.log('Moving Right!');
 });
 
 ps4Controller.on('dpadLeft:press', (direction) => {
-    console.log(manipulateAxis(direction))
-    console.log('Left');
+    rollingSpider.left({steps: manipulateAxis(direction), speed: speed});
+    console.log('Moving Left!');
 });
 
 ps4Controller.on('share:press', () => {
@@ -135,5 +138,3 @@ ps4Controller.on('square:press', () => {
 });
 
 ps4Controller.connect();
-
-
