@@ -4,6 +4,8 @@ let dualShock = require('dualshock-controller');
 let RollingSpider = require('rolling-spider');
 let vertical = 50;
 let horizontal = 50;
+let top = 50;
+let bottom = 50;
 let speed = 50;
 
 let ps4Controller = dualShock({
@@ -56,6 +58,20 @@ function manipulateAxis(direction) {
             }
             return horizontal;
         },
+        l1() {
+            if (top <= 95) {
+                top = top + baseIncrement;
+            }
+
+            return top;
+        },
+        r1() {
+            if (bottom <= 95) {
+                bottom = bottom + baseIncrement;
+            }
+
+            return bottom;
+        }
     }
 
     if (options.hasOwnProperty(direction)) {
@@ -110,8 +126,8 @@ ps4Controller.on('share:press', () => {
 
 ps4Controller.on('options:press', () => {
     console.log('ON');
-    rollingSpider.takeOff();
     rollingSpider.flatTrim();
+    rollingSpider.takeOff();
 });
 
 /**
@@ -136,5 +152,19 @@ ps4Controller.on('square:press', () => {
     console.log('LEFTFLIP');
     rollingSpider.leftFlip();
 });
+
+/**
+ * UP / DOWN
+ */
+ps4Controller.on('l1:press', (direction) => {
+    rollingSpider.up({steps: manipulateAxis(direction), speed: speed});
+    console.log('Going up!!!');
+});
+
+ps4Controller.on('r1:press', (direction) => {
+    rollingSpider.down({steps: manipulateAxis(direction), speed: speed});
+    console.log('Going down!!!');
+});
+
 
 ps4Controller.connect();

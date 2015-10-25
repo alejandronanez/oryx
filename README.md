@@ -37,4 +37,6 @@ UP = move forward
 RIGHT = move right
 DOWN = move backwards
 LEFT = move left
+L1 = Go up!
+R1 = Go down!
 ```
