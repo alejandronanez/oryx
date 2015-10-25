@@ -35,6 +35,6 @@ SQUARE = Barrel roll to the left!
 ```
 UP = move forward
 RIGHT = move right
-DOWN = move backward
+DOWN = move backwards
 LEFT = move left
 ```
