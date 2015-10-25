@@ -1,0 +1,26 @@
+{
+  "name": "oryx",
+  "version": "1.0.0",
+  "description": "Rolling spider pet project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/alejandronanez/oryx.git"
+  },
+  "keywords": [
+    "rolling",
+    "spider"
+  ],
+  "author": "Alejandro Nanez Ortiz <alejonanez@gmail.com> (http://github.com/alejandronanez)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alejandronanez/oryx/issues"
+  },
+  "homepage": "https://github.com/alejandronanez/oryx#readme",
+  "dependencies": {
+    "rolling-spider": "1.5.0"
+  }
+}
