@@ -2,6 +2,9 @@
 
 ¯/\_(ツ)_/¯ 
 
+![The Drone!](https://raw.github.com/alejandronanez/oryx/master/misc/drone-1.jpg)
+
+
 ## Instructions
 
 Just run `npm install` to install dependencies.
