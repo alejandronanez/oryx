@@ -1,10 +1,33 @@
-## Rolling Spider Madness Pet Project
+# Rolling Spider Madness Pet Project
 
 ¯/\_(ツ)_/¯ 
 
-### Instructions
+## Instructions
 
 Just run `npm install` to install dependencies.
 
-To discover your Rolling Spider, run `node discover.js`
+- To discover your Rolling Spider, run `node discover.js`
 
+- To move your Rolling Spider, run `node index.js`
+
+## Control Mapping
+
+We're using a Dualshock 4 controller to move our Rolling Spider.
+
+#### Barrel roll!
+
+```
+TRIANGLE = Front flip!
+CIRCLE = Barrel roll to the right!
+X = Back flip!
+SQUARE = Barrel roll to the left!
+```
+
+#### Moving around the world using the digital pad
+
+```
+UP = move forward
+RIGHT = move right
+DOWN = move backward
+LEFT = move left
+```
